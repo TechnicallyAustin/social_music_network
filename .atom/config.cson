@@ -1,0 +1,5 @@
+"*":
+  core:
+    debugLSP: true
+  "exception-reporting":
+    userId: "32436d13-b8dd-45b1-b523-2d66e2d4bdad"
