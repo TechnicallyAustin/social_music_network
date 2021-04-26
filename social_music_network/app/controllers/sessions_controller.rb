@@ -1,37 +1,27 @@
 require 'pry'
 class SessionsController < UsersController
-    def new
-      end
+  def new
+  end
     
-      def create
-        if auth #facebook login
-            @user.find_or_create_by(email: auth["info"]["email"]) do |u|
-              u.full_name = auth["info"]["name"]
-              # Secure Random generates a secrue 10 digit hexadecimal string that will be encrypted by bcrypt
-              u.password = SecureRandom.hex(10)
-            end
-            if @user.save
-              sessions[:user_id] = @user.id
-              redirect_to @user 
-            else
-            redirect_to root_path
-            end
-        else 
-          @user = User.find_by(email_address: params[:email_address])
-          if @user && @user.authenticate(params[:password])
-            session[:user_id] = @user.id
-            redirect_to user_path(@user)
-          else
-            redirect_to '/login'
-          end
-        end
-      end
+  def create
+    @user = User.find_by(email_address: params[:email_address])
+    binding.pry
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
+    else 
+      redirect_to '/login'
+    end
+  end
     
       def login
-        binding.pry
-        @user = User.find(params[:id])
-        session[:user_id] = @user.id
-        redirect_to user_path(@user)
+          @user = User.find_by_email(params[:email_address])
+          if @user.password == params[:password]
+            give_token
+          else
+            redirect_to home_url
+          end
+        
       end
     
       def welcome
@@ -40,6 +30,11 @@ class SessionsController < UsersController
       def logout
         session.delete :email
       end
+
+      def destroy
+        session.delete :email_address
+      end
+
     
       private
       
