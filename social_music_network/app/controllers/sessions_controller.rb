@@ -1,6 +1,6 @@
+require 'pry'
 class SessionsController < UsersController
     def new
-        @user = User.new
       end
     
       def create
@@ -11,13 +11,13 @@ class SessionsController < UsersController
               u.password = SecureRandom.hex(10)
             end
             if @user.save
-              sessions[:user_id] = @user.user_id
+              sessions[:user_id] = @user.id
               redirect_to @user 
             else
             redirect_to root_path
             end
         else 
-        @user = User.find(params[:id])
+          @user = User.find_by(email_address: params[:email_address])
           if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
             redirect_to user_path(@user)
@@ -28,7 +28,8 @@ class SessionsController < UsersController
       end
     
       def login
-        @user = User.find(puser_params)
+        binding.pry
+        @user = User.find(params[:id])
         session[:user_id] = @user.id
         redirect_to user_path(@user)
       end

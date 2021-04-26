@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:id])
+        @user = User.find(user_params)
     end
 
     def new
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.valid?
-            @user.save        if @user.save
+            @user.save
             session[:user_id] = @user.id
             render :show
         else

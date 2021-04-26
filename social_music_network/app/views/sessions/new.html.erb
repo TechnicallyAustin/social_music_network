@@ -1,6 +1,8 @@
 <h1> Social Music Network Login </h1><br>
-<%=form_for(@user) do |t|%>
-<%=t.label :email%>: <%= t.text_field :email_address%>
-<%= t.label :password%>: <%= t.password_field :password%>
-<%=t.submit "Login"%>
+   <%= form_tag '/login' do %>
+   <%= label_tag :email_address%>
+   <%= text_field_tag :email_address %>
+   <%= label_tag :password%>
+   <%= password_field_tag :password%>
+   <%= submit_tag "Login"%>
 <%end%>

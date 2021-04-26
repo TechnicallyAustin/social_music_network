@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'playlists/skip-test-framework'
   #user routes w/ nested playlist routes
   resources :users do
     resources :playlist
