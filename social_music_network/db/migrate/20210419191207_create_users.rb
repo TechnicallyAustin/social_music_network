@@ -6,9 +6,9 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :email_address
       t.string :password
       t.string :password_digest
-      t.integer :artist_id
-      t.integer :song_id
-      t.integer :playlist_id
+      #t.integer :artist_id
+      #t.integer :song_id
+      #t.integer :playlist_id
       # Put associations for user
     end
   end

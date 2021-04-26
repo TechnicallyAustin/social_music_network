@@ -9,4 +9,9 @@ has_many :songs, through: :playlists
 # validates :email_address
 # validates :password
 # has_secure_password #-- for bcrypt
+
+    def full_name
+        self.first_name + " " + self.last_name
+    end
+
 end

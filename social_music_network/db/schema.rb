@@ -10,6 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_04_20_180616) do
+
+  create_table "artists", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.string "title"
+    t.string "artist"
+    t.string "genre"
+    t.integer "user_id"
+    t.integer "playlist_id"
+    t.integer "artist_id"
+    t.index ["artist_id"], name: "index_songs_on_artist_id"
+    t.index ["playlist_id"], name: "index_songs_on_playlist_id"
+    t.index ["user_id"], name: "index_songs_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email_address"
+    t.string "password"
+    t.string "password_digest"
+  end
 
 end

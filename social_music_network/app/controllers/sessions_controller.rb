@@ -28,8 +28,9 @@ class SessionsController < UsersController
       end
     
       def login
-        @user = User.find(params[:id])
+        @user = User.find(puser_params)
         session[:user_id] = @user.id
+        redirect_to user_path(@user)
       end
     
       def welcome
